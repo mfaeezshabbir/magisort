@@ -14,6 +14,12 @@ A powerful, native Python tool to organize your messy folders into categorized s
 - **Conflict Handling**: Appends counters (e.g., `file_1.png`) to avoid overwriting existing files.
 - **Safe & Standard**: Uses Python's standard library for all file operations.
 
+## 📦 Releases
+
+You can download the latest standalone binary for Linux:
+
+- **Magisort_v1.0_Linux.zip**: Standalone package. Includes **Magisort.bin** (no Python required).
+
 ## 📂 Supported Categories
 
 - **Images**: `.jpg`, `.png`, `.gif`, `.webp`, `.svg`, `.ico`, `.tiff`
@@ -60,6 +66,22 @@ If you made a mistake, you can revert the organization in a specific folder:
 ```bash
 python3 organizer.py /path/to/folder --undo
 ```
+
+## 🏗️ Building from Source
+
+To create your own standalone executable (like the one in the Releases), use **PyInstaller**:
+
+1. Install PyInstaller:
+
+   ```bash
+   pip install pyinstaller
+   ```
+
+2. Build the binary (Linux example):
+   ```bash
+   pyinstaller --noconsole --onefile --name "Magisort" --add-data "$(python3 -c 'import customtkinter; import os; print(os.path.dirname(customtkinter.__file__))'):customtkinter" desktop_app.py
+   ```
+   The binary will be generated in the `dist/` folder.
 
 ## 📜 Requirements
 

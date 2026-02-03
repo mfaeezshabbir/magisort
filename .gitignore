@@ -6,7 +6,7 @@ __pycache__/
 .Python
 env/
 build/
-develop-eggs/
+develo# Release filesp-eggs/
 dist/
 downloads/
 eggs/
@@ -14,7 +14,7 @@ eggs/
 lib/
 lib64/
 parts/
-sdist/
+sdis# Release filest/
 var/
 wheels/
 *.egg-info/
@@ -35,3 +35,10 @@ ENV/
 # OS specific
 .DS_Store
 Thumbs.db
+
+# Release files
+dist/
+build/
+release/
+*.spec
+Magisort_v1.0_Linux.zip
