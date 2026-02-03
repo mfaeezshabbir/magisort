@@ -16,9 +16,11 @@ A powerful, native Python tool to organize your messy folders into categorized s
 
 ## 📦 Releases
 
-You can download the latest standalone binary for Linux:
+Find the latest standalone binaries for **Linux** and **Windows** in the [Releases](https://github.com/mfaeezshabbir/magisort/releases) section:
 
-- **Magisort_v1.0_Linux.zip**: Standalone package. Includes **Magisort.bin** (no Python required).
+- **Magisort_Linux.bin**: Standalone for Linux.
+- **Magisort_Windows.exe**: Standalone for Windows.
+- No Python installation required to run these binaries.
 
 ## 📂 Supported Categories
 
