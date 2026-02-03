@@ -9,16 +9,11 @@ jobs:
   build:
     name: Build for ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        include:
-          - os: ubuntu-latest
-            artifact_name: Magisort_Linux
-            sep: ":"
-          - os: windows-latest
-            artifact_name: Magisort_Windows.exe
-            sep: ";"
 
     steps:
       - name: Checkout code
@@ -37,12 +32,15 @@ jobs:
       - name: Build with PyInstaller (Linux)
         if: matrix.os == 'ubuntu-latest'
         run: |
-          pyinstaller --noconsole --onefile --name "Magisort" --add-data "$(python -c 'import customtkinter; import os; print(os.path.dirname(customtkinter.__file__))'):customtkinter" desktop_app.py
+          CTK_PATH=$(python -c 'import customtkinter; import os; print(os.path.dirname(customtkinter.__file__))')
+          pyinstaller --noconsole --onefile --name "Magisort" --add-data "$CTK_PATH:customtkinter" desktop_app.py
 
       - name: Build with PyInstaller (Windows)
         if: matrix.os == 'windows-latest'
+        shell: pwsh
         run: |
-          pyinstaller --noconsole --onefile --name "Magisort" --add-data "$(python -c 'import customtkinter; import os; print(os.path.dirname(customtkinter.__file__))');customtkinter" desktop_app.py
+          $CTK_PATH = python -c "import customtkinter; import os; print(os.path.dirname(customtkinter.__file__))"
+          pyinstaller --noconsole --onefile --name "Magisort" --add-data "${CTK_PATH};customtkinter" desktop_app.py
 
       - name: Rename binaries
         shell: bash
@@ -58,7 +56,6 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            dist/Magisort_Windows.exe
-            dist/Magisort_Linux.bin
+            dist/Magisort_*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
